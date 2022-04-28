@@ -18,6 +18,10 @@ public class TodoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Todo> getAll() {
+        if(Todo.count() == 0) {
+            populateData();
+        }
+            
         return Todo.listAll();
     }
 
@@ -30,8 +34,19 @@ public class TodoResource {
 
     }
 
+    @Transactional
+    public void populateData() {
+        new Todo("one", false, 1).persist();
+        new Todo("two", false, 2).persist();
+        new Todo("three", false, 3).persist();
+        new Todo("four", false, 4).persist();
+        new Todo("five", false, 5).persist();
+        new Todo("six", false, 6).persist();
+
+    }
 
 
 }
+
 
 
